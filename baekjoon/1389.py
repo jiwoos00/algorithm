@@ -3,6 +3,9 @@ N, M = map(int, input().split())
 INF = float('inf')
 friend = [[INF] * N for _ in range(N)]
 
+for i in range(N):
+    friend[i][i] = 0
+
 for _ in range(M):
     i, j = map(int, input().split())
     friend[i - 1][j - 1] = 1
@@ -11,11 +14,8 @@ for _ in range(M):
 for k in range(N):
     for i in range(N):
         for j in range(N):
-                if friend[i][j] > friend[i][k] + friend[k][j]:
-                    friend[i][j] = friend[i][k] + friend[k][j]
+            friend[i][j] = min(friend[i][j], friend[i][k] + friend[k][j])
 
-
-print(friend)
 
 ans = []
 for i in range(N):
